@@ -28,9 +28,10 @@ module.exports = function (app) {
   });
 
   app.post('/login',function(req, res, next) {
-     passport.authenticate('local', function(err, user, info, info1, link){
+
+     passport.authenticate('local', function(err, user, info, link){
         if ( err ) { return next(err); }
-        if ( !user ) { return res.render('login', {info : "That user doesn't exist yet. You can register ", info1: "?",link: "register"});
+        if ( !user ) { return res.render('login', {info : "Either the username or password is incorrect or the user doesn't exist yet. You can register ", link: "register"});
           }
         req.logIn(user, function(err) {
           if (err){ return next(err); }
